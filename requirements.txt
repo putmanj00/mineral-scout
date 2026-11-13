@@ -5,4 +5,4 @@ pydantic>=2.6
 pydantic-settings>=2.2
 pytest>=8.0
 pytest-timeout>=2.3
-respx>=0.21
+respx>=0.23.1
