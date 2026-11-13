@@ -1,0 +1,27 @@
+# mineral-scout secret-scan config.
+#
+# Loaded automatically by gitleaks from the repo root for the CI job
+# (.github/workflows/secrets.yml).
+#
+# CRITICAL: `[extend] useDefault = true` keeps gitleaks' full built-in ruleset.
+# A custom config otherwise REPLACES the defaults, which would silently gut the
+# scanner (it would detect almost nothing). Do not remove this.
+title = "mineral-scout gitleaks config"
+
+[extend]
+useDefault = true
+
+# Allowlist policy — there is intentionally NO [allowlist] block here.
+#
+# A full `gitleaks dir .` over the tracked tree should find ZERO secrets, so
+# there are no false positives to exempt. The built-in rules' own allowlists
+# still apply because `useDefault = true` above.
+#
+# gitleaks REJECTS an empty allowlist ("must contain at least one check"), so do
+# not add a stub block. When a real tracked fixture is later confirmed to be a
+# placeholder, add a narrowly-scoped allowlist then — exempt ONLY confirmed
+# false positives (a specific fixture path or the exact placeholder string,
+# anchored), NEVER a broad secret-shaped regex, and NEVER a path that could
+# carry a real secret. In particular do NOT allowlist `.env`: a force-added
+# `.env` (`git add -f .env`) must still be scanned, or this guardrail is
+# defeated.

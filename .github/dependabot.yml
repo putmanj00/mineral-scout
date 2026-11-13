@@ -1,0 +1,14 @@
+# Dependabot — weekly dependency + Actions updates. Note: if a
+# required PR check needs Actions secrets, dependabot PRs read a SEPARATE secret
+# store — mirror those secrets with `gh secret set --app dependabot` or the
+# check fails on every dependabot PR.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mineral Scout — where to dig</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin="">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <header>
+      <h1>⛏️ Mineral Scout</h1>
+      <p class="tagline">Find minerals · check land status · ask the owner</p>
+    </header>
+
+    <section class="panel">
+      <label for="place-search">Go to place</label>
+      <div class="row">
+        <input id="place-search" type="text" placeholder="e.g. Quartzsite, AZ" autocomplete="off">
+        <button id="place-go" title="Search">Go</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <label for="commodity-input">Minerals / commodities</label>
+      <input id="commodity-input" type="text" list="commodity-list"
+             placeholder="type: Gold, Copper, Turquoise…" autocomplete="off">
+      <datalist id="commodity-list"></datalist>
+      <div id="commodity-chips" class="chips"></div>
+      <div id="variety-cards"></div>
+
+      <label>Site development status</label>
+      <div id="status-filters" class="checkgroup">
+        <label><input type="checkbox" value="Producer" checked> Producer</label>
+        <label><input type="checkbox" value="Past Producer" checked> Past producer</label>
+        <label><input type="checkbox" value="Prospect" checked> Prospect</label>
+        <label><input type="checkbox" value="Occurrence" checked> Occurrence</label>
+        <label><input type="checkbox" value="Plant" checked> Plant</label>
+        <label><input type="checkbox" value="Unknown" checked> Unknown</label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <label>Map layers</label>
+      <div class="checkgroup">
+        <label><input type="checkbox" id="layer-sites" checked> Mineral sites (USGS MRDS)</label>
+        <label><input type="checkbox" id="layer-mines"> Abandoned mine features (USGS USMIN)</label>
+        <label class="indent"><input type="checkbox" id="mines-tailings-only"> tailings / dumps only</label>
+        <label><input type="checkbox" id="layer-claims"> Active mining claims (BLM)</label>
+        <label><input type="checkbox" id="layer-ownership"> Land ownership overlay (BLM SMA)</label>
+        <label><input type="checkbox" id="layer-mindat"> Mindat localities</label>
+      </div>
+      <div id="ownership-legend" class="legend hidden"></div>
+    </section>
+
+    <section class="panel">
+      <div class="row">
+        <button id="btn-export">⬇ Export GPX</button>
+        <button id="btn-bookmarks">★ Bookmarks (<span id="bm-count">0</span>)</button>
+      </div>
+      <div class="row">
+        <button id="btn-laws">⚖ Collecting laws</button>
+        <button id="btn-check-land" class="toggle">🏷 Check land mode</button>
+      </div>
+      <p class="hint">Check-land mode: click anywhere on the map to see who manages that spot and how to contact a private owner.</p>
+    </section>
+
+    <section class="panel small" id="status-line">Ready. Zoom to an area (z≥6) to load sites.</section>
+
+    <footer class="panel small">
+      Data: USGS MRDS &amp; USMIN, BLM SMA/MLRS, USGS PAD-US, mindat.org, county assessors.
+      Not legal advice. <b>Never enter abandoned mines — Stay Out, Stay Alive.</b>
+    </footer>
+  </aside>
+
+  <div id="map"></div>
+
+  <div id="detail" class="drawer hidden">
+    <button class="drawer-close" id="detail-close">×</button>
+    <div id="detail-body"></div>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <button class="drawer-close" id="modal-close">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

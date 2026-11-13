@@ -1,0 +1,9 @@
+# Code-owner lock on the CI-gate files. With "Require review from Code Owners"
+# enabled in branch protection, a PR touching these paths needs code-owner
+# approval before merge.
+#
+# NOTE: a PR opened by the sole code owner BYPASSES this gate (GitHub does not
+# require self-review) — so on a single-maintainer repo this is defense-in-depth
+# (it locks the paths against OTHER contributors), not a hard gate on the owner.
+/.github/       @putmanj00
+/.gitleaks.toml @putmanj00
